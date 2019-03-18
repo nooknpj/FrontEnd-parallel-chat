@@ -4,7 +4,10 @@ export class PageNotFound extends Component {
   render() {
     return (
       <div>
-        <p> invalid Url</p>
+        <p style={{ fontSize: "50px", marginTop: "40vh", marginLeft: "40%" }}>
+          {" "}
+          invalid Url
+        </p>
       </div>
     );
   }
