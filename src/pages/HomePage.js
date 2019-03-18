@@ -6,7 +6,8 @@ export class HomePage extends Component {
   constructor() {
     super();
     this.state = {
-      messageToBeSent: "",
+      messageContent: "",
+      currentClientID: "3",
       messages: [
         {
           clientID: "1",
@@ -29,17 +30,67 @@ export class HomePage extends Component {
           time: "13.00",
           content:
             "sdasdsssssssssssssssssssssssssssssssssssssssssssssssssssssadasdsadsadasdasdsssssssssssssssssssssssssssssssssssssssssssssssssssss"
+        },
+        {
+          clientID: "2",
+          time: "12.01",
+          content: "Hi"
+        },
+        {
+          clientID: "2",
+          time: "12.01",
+          content: "Hi"
+        },
+        {
+          clientID: "2",
+          time: "12.01",
+          content: "Hi"
+        },
+        {
+          clientID: "2",
+          time: "12.01",
+          content: "Hi"
+        },
+        {
+          clientID: "2",
+          time: "12.01",
+          content: "Hi"
+        },
+        {
+          clientID: "2",
+          time: "12.01",
+          content: "Hi"
         }
       ]
     };
   }
 
   onFormChange = e => {
-    this.state[e.target.type] = e.target.value;
+    this.state[e.target.id] = e.target.value;
     console.log(this.state);
   };
 
   onSendMessageClick = () => {
+    var messageContent = this.state.messageContent;
+    if (messageContent == "") return;
+
+    var messageContentForm = this.refs.messageContentFormRef;
+    let currentTime = new Date().toLocaleString();
+
+    let msg = {
+      clientID: this.state.currentClientID,
+      content: messageContent,
+      time: currentTime
+    };
+
+    this.state.messages.push(msg);
+    console.log(this.state);
+
+    this.setState({
+      messageContent: ""
+    });
+
+    messageContentForm.value = "";
     // doSomething
   };
 
@@ -91,9 +142,12 @@ export class HomePage extends Component {
 
             <div className="sendMessageArea">
               <Form.Control
-                type="messageToBeSent"
+                id="messageContent"
+                type="text"
+                placeholder=""
                 onChange={this.onFormChange}
                 style={{ marginLeft: "1px", height: "auto" }}
+                ref="messageContentFormRef"
               />
 
               <Button

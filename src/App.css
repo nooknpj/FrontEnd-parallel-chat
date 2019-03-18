@@ -58,7 +58,7 @@
 .messageArea {
   min-height: 60vh;
   max-height: 60vh;
-  background-color: green;
+
   overflow-wrap: break-word;
 
   overflow-y: scroll;
