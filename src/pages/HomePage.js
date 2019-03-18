@@ -80,7 +80,7 @@ export class HomePage extends Component {
             <Button
               variant="primary"
               type="submit"
-              onClick={this.onExitClick}
+              //onClick={this.onExitClick}
               style={{ marginLeft: "10px" }}
             >
               Create Group
@@ -125,7 +125,8 @@ export class HomePage extends Component {
           <div className="rightDiv">
             <p style={{ fontSize: "50px", marginLeft: "20px" }}>
               {" "}
-              Join any group to start chatting!
+              Enter joined groups to start chatting. You can also join or create
+              new groups.
             </p>
           </div>
         ) : (
