@@ -31,7 +31,7 @@ export class HomePage extends Component {
   };
 
   onLeaveGroupClick = e => {
-    this.enterGroup(5555);
+    //this.enterGroup(5555);
     console.log(this.state);
   };
 
@@ -42,11 +42,12 @@ export class HomePage extends Component {
 
   onSendMessageClick = () => {
     var messageContent = this.state.messageContent;
-    if (messageContent == "") return;
+    if (messageContent === "") return;
 
     var messageContentForm = this.refs.messageContentFormRef;
     let currentTime = new Date().toLocaleString();
 
+    // msgs that will be sent to backend will not contain timeStamp
     let msg = {
       clientID: this.state.clientID,
       content: messageContent,
@@ -90,9 +91,9 @@ export class HomePage extends Component {
             style={{
               marginLeft: "10px",
               marginRight: "10px",
-              marginTop: "3px",
-              border: "solid black 2px",
-              borderRadius: "2px",
+              marginTop: "10px",
+
+              borderRadius: "5px",
               backgroundColor: "#8fd6bd"
             }}
           >
@@ -108,9 +109,8 @@ export class HomePage extends Component {
             style={{
               marginLeft: "10px",
               marginRight: "10px",
-              marginTop: "3px",
-              border: "solid black 2px",
-              borderRadius: "2px",
+              marginTop: "10px",
+              borderRadius: "5px",
               backgroundColor: "#FE8F1D"
             }}
           >
