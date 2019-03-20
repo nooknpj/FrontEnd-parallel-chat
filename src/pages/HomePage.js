@@ -22,7 +22,8 @@ export class HomePage extends Component {
     this.setState({
       userID: localStorage.getItem("userID")
     });
-    let userID = this.state.userID;
+    let userID = localStorage.getItem("userID");
+    console.log(userID);
     this.props.socket.emit("getGroup", { userID });
 
     this.props.socket.on("getGroupSuccess", data => {
