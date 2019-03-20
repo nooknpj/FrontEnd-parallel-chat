@@ -10,6 +10,7 @@ export class HomePage extends Component {
     this.state = {
       groupID: "u1231231",
       messageContent: "",
+      createGroupName: "",
       userID: "3",
       joinedGroups: joinedGroupsMockUp,
       otherGroups: otherGroupsMockUp,
@@ -36,7 +37,15 @@ export class HomePage extends Component {
   };
 
   onCreateGroup = e => {
-    this.props.socket.emit("createGroup");
+    console.log("enter create group in client side");
+    let groupName = this.state.createGroupName;
+    this.props.socket.emit("createGroup", { groupName });
+    this.setState({
+      createGroupName: ""
+    });
+
+    var createGroupNameForm = this.refs.createGroupNameRef;
+    createGroupNameForm.value = "";
   };
 
   onExitClick = e => {
@@ -109,17 +118,24 @@ export class HomePage extends Component {
           </div>
 
           <div className="createGroupDiv">
-            <Form.Label>Username</Form.Label>
             <Form.Control
-              id="username"
-              placeholder="Username"
+              ref="createGroupNameRef"
+              id="createGroupName"
+              placeholder="Group name"
               onChange={this.onFormChange}
+              style={{ width: "60%" }}
             />
             <Button
               variant="primary"
               type="submit"
               onClick={this.onCreateGroup}
-              style={{ marginLeft: "10px" }}
+              style={{
+                fontSize: "15px",
+                padding: "0px",
+                paddingLeft: "4px",
+                paddingRight: "4px",
+                marginLeft: "10px"
+              }}
             >
               Create Group
             </Button>

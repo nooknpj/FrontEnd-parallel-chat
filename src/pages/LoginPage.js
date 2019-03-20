@@ -21,6 +21,10 @@ export class LoginPage extends Component {
       localStorage.setItem("userID", data.userID);
       window.location.href = "/home";
     });
+
+    this.props.socket.on("loginFailed", data => {
+      window.prompt("login Failed");
+    });
   }
 
   onFormChange = e => {
@@ -36,9 +40,8 @@ export class LoginPage extends Component {
     let username = this.state.username;
     let password = this.state.password;
     console.log("clicked");
-
     this.props.socket.emit("login", { username, password });
-    window.location.href = "/home";
+    // window.location.href = "/home";
   };
 
   //------------------------------------------------Login Authen-------------------------------------------------------------------------

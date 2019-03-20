@@ -54,9 +54,7 @@ class App extends Component {
 
               <Route
                 path="/home"
-                render={props => (
-                  <HomePage {...props} socket={this.state.socket} />
-                )}
+                render={props => <HomePage {...props} socket={socket} />}
               />
               <Route component={PageNotFound} />
             </Switch>
