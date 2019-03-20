@@ -26,8 +26,10 @@ export class LoginPage extends Component {
     // call Socket.on or something
     let username = this.state.username;
     let password = this.state.password;
-    this.props.socket.emit("loginClick", { username, password });
-    //window.location.href = "/home";
+    console.log("clicked");
+
+    this.props.socket.emit("login", { username, password });
+    window.location.href = "/home";
   };
 
   //------------------------------------------------Login Authen-------------------------------------------------------------------------

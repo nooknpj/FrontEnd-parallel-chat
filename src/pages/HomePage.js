@@ -10,12 +10,24 @@ export class HomePage extends Component {
     this.state = {
       groupID: "u1231231",
       messageContent: "",
-      clientID: "3",
+      userID: "3",
       joinedGroups: joinedGroupsMockUp,
       otherGroups: otherGroupsMockUp,
       messages: messagesMockUp
     };
   }
+
+  componentDidMount() {
+    this.setState({
+      userID: localStorage.getItem("userID")
+    });
+  }
+
+  onLogoutClick = () => {
+    localStorage.setItem("userID", "-1");
+    console.log("logouttt");
+    window.location.href = "/";
+  };
 
   enterGroup = e => {
     this.setState({
@@ -53,7 +65,7 @@ export class HomePage extends Component {
 
     // msgs that will be sent to backend will not contain timeStamp
     let msg = {
-      clientID: this.state.clientID,
+      userID: this.state.userID,
       content: messageContent,
       time: currentTime
     };
@@ -77,8 +89,23 @@ export class HomePage extends Component {
       <div style={{ display: "flex", flexDirection: "row", minWidth: "100vh" }}>
         <div className="leftDiv">
           <div className="clientInfo">
-            <span> ClientID: </span>
-            <span> {this.state.clientID}</span>
+            <span> userID: </span>
+            <span> {this.state.userID}</span>
+
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={this.onLogoutClick}
+              style={{
+                marginLeft: "20px",
+                marginRight: "10px",
+                backgroundColor: "red",
+                border: "red",
+                float: "right"
+              }}
+            >
+              Log Out
+            </Button>
           </div>
 
           <div className="createGroupDiv">
@@ -235,54 +262,54 @@ const otherGroupsMockUp = [
 
 const messagesMockUp = [
   {
-    clientID: "1",
+    userID: "1",
     time: "12.00",
     content: "Hello"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content: "Hi"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content:
       "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
   },
   {
-    clientID: "1",
+    userID: "1",
     time: "13.00",
     content:
       "sdasdsssssssssssssssssssssssssssssssssssssssssssssssssssssadasdsadsadasdasdsssssssssssssssssssssssssssssssssssssssssssssssssssss"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content: "Hi"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content: "Hi"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content: "Hi"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content: "Hi"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content: "Hi"
   },
   {
-    clientID: "2",
+    userID: "2",
     time: "12.01",
     content: "Hi"
   }

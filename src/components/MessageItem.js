@@ -6,7 +6,7 @@ export class MessageItem extends Component {
       <div className="messageDiv">
         <div style={messageHeaderStyle}>
           <span style={{ marginLeft: "10px" }}> ClientID: </span>
-          <span> {this.props.clientID}</span>
+          <span> {this.props.userID}</span>
           <div style={{ float: "right", marginRight: "10px" }}>
             <span> Sent At: </span>
             <span> {this.props.time}</span>

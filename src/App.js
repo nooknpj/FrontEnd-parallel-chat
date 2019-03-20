@@ -21,8 +21,16 @@ class App extends Component {
       reconnectionDelayMax: 5000,
       reconnectionAttempts: Infinity
     });
+
     socket.on("clientConnect", () => {
       console.log("client is connected to socket");
+    });
+
+    socket.on("loginSuccess", data => {
+      console.log("login success returned from backend");
+      console.log(data.userID);
+      localStorage.setItem("userID", data.userID);
+      window.location.href = "/home";
     });
 
     this.setState({

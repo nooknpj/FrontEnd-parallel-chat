@@ -4,7 +4,7 @@ export class MessageList extends Component {
   render() {
     return this.props.messages.map(messageItem => (
       <MessageItem
-        clientID={messageItem.clientID}
+        userID={messageItem.userID}
         content={messageItem.content}
         time={messageItem.time}
       />
