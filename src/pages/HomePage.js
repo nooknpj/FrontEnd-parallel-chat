@@ -22,6 +22,13 @@ export class HomePage extends Component {
     this.setState({
       userID: localStorage.getItem("userID")
     });
+    let userID = this.state.userID;
+    this.props.socket.emit("getGroup", { userID });
+
+    this.props.socket.on("getGroupSuccess", data => {
+      console.log("recieve groups from backend");
+      console.log(data);
+    });
   }
 
   onLogoutClick = () => {
