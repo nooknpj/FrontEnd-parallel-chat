@@ -23,6 +23,10 @@ export class HomePage extends Component {
     });
   };
 
+  onCreateGroup = e => {
+    this.props.socket.emit("createGroup");
+  };
+
   onExitClick = e => {
     this.setState({
       groupID: "-1"
@@ -81,7 +85,7 @@ export class HomePage extends Component {
             <Button
               variant="primary"
               type="submit"
-              //onClick={this.onExitClick}
+              onClick={this.onCreateGroup}
               style={{ marginLeft: "10px" }}
             >
               Create Group
