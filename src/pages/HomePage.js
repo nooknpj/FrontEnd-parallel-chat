@@ -109,6 +109,12 @@ export class HomePage extends Component {
           </div>
 
           <div className="createGroupDiv">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              id="username"
+              placeholder="Username"
+              onChange={this.onFormChange}
+            />
             <Button
               variant="primary"
               type="submit"

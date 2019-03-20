@@ -14,6 +14,15 @@ export class LoginPage extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.socket.on("loginSuccess", data => {
+      console.log("login success returned from backend");
+      console.log(data.userID);
+      localStorage.setItem("userID", data.userID);
+      window.location.href = "/home";
+    });
+  }
+
   onFormChange = e => {
     this.state[e.target.id] = e.target.value;
 

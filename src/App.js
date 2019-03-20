@@ -6,6 +6,14 @@ import PageNotFound from "./pages/PageNotFound";
 import "./App.css";
 import io from "socket.io-client";
 
+const endpoint = "localhost:8081";
+const socket = io.connect(endpoint, {
+  reconnection: true,
+  reconnectionDelay: 100,
+  reconnectionDelayMax: 5000,
+  reconnectionAttempts: Infinity
+});
+
 class App extends Component {
   constructor() {
     super();
@@ -15,27 +23,16 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    const socket = io.connect(this.state.endpoint, {
-      reconnection: true,
-      reconnectionDelay: 100,
-      reconnectionDelayMax: 5000,
-      reconnectionAttempts: Infinity
-    });
-
     socket.on("clientConnect", () => {
       console.log("client is connected to socket");
     });
 
-    socket.on("loginSuccess", data => {
-      console.log("login success returned from backend");
-      console.log(data.userID);
-      localStorage.setItem("userID", data.userID);
-      window.location.href = "/home";
-    });
-
-    this.setState({
-      socket: socket
-    });
+    // socket.on("loginSuccess", data => {
+    //   console.log("login success returned from backend");
+    //   console.log(data.userID);
+    //   localStorage.setItem("userID", data.userID);
+    //   window.location.href = "/home";
+    // });
   };
 
   render() {
@@ -52,9 +49,7 @@ class App extends Component {
               <Route
                 exact
                 path="/"
-                render={props => (
-                  <LoginPage {...props} socket={this.state.socket} />
-                )}
+                render={props => <LoginPage {...props} socket={socket} />}
               />
 
               <Route
