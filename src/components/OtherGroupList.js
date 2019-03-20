@@ -4,7 +4,11 @@ import OtherGroupItem from "./OtherGroupItem";
 export class OtherGroupList extends Component {
   render() {
     return this.props.otherGroups.map(groupItem => (
-      <OtherGroupItem groupID={groupItem.groupID} />
+      <OtherGroupItem
+        groupID={groupItem.groupID}
+        //groupID={groupItem.groupId}
+        groupName={groupItem.groupName}
+      />
     ));
   }
 }

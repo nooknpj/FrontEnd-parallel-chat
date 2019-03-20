@@ -8,10 +8,11 @@ export class HomePage extends Component {
   constructor() {
     super();
     this.state = {
-      groupID: "u1231231",
+      groupID: "-1",
+      groupName: "-1",
       messageContent: "",
       createGroupName: "",
-      userID: "3",
+      userID: "-1",
       joinedGroups: joinedGroupsMockUp,
       otherGroups: otherGroupsMockUp,
       messages: messagesMockUp
@@ -29,6 +30,9 @@ export class HomePage extends Component {
     this.props.socket.on("getGroupSuccess", data => {
       console.log("recieve groups from backend");
       console.log(data);
+      this.setState({
+        joinedGroups: data
+      });
     });
   }
 
@@ -40,8 +44,13 @@ export class HomePage extends Component {
 
   enterGroup = e => {
     this.setState({
-      groupID: e
+      groupID: e.groupID,
+      groupName: e.groupName
     });
+  };
+
+  joinGroup = e => {
+    //doSomething
   };
 
   onCreateGroup = e => {
@@ -58,13 +67,14 @@ export class HomePage extends Component {
 
   onExitClick = e => {
     this.setState({
-      groupID: "-1"
+      groupID: "-1",
+      groupNmae: "-1"
     });
     console.log(this.state);
   };
 
   onLeaveGroupClick = e => {
-    //this.enterGroup(5555);
+    this.onExitClick();
     console.log(this.state);
   };
 
@@ -178,7 +188,10 @@ export class HomePage extends Component {
             Other Groups
           </p>
           <div className="otherGroupsDiv">
-            <OtherGroupList otherGroups={this.state.otherGroups} />
+            <OtherGroupList
+              otherGroups={this.state.otherGroups}
+              joinGroup={this.joinGroup}
+            />
           </div>
         </div>
 
@@ -193,8 +206,12 @@ export class HomePage extends Component {
         ) : (
           <div className="rightDiv">
             <div className="groupHeader">
-              <span>GroupID : </span>
-              <span style={{ marginLeft: "10px" }}> {this.state.groupID} </span>
+              <span>GroupID:</span>
+              <span style={{ marginLeft: "5px" }}> {this.state.groupID} </span>
+              <span style={{ marginLeft: "10px" }}>
+                {" "}
+                {this.state.groupName}
+              </span>
 
               <div style={{ marginLeft: "auto" }}>
                 <Button
@@ -271,22 +288,20 @@ const joinedGroupsMockUp = [
 
 const otherGroupsMockUp = [
   {
-    groupID: "99999"
+    groupID: "929",
+    groupName: "otherGroup"
   },
   {
-    groupID: "88888"
+    groupID: "831",
+    groupName: "otherGroup"
   },
   {
-    groupID: "88888"
+    groupID: "12",
+    groupName: "otherGroup"
   },
   {
-    groupID: "88888"
-  },
-  {
-    groupID: "88888"
-  },
-  {
-    groupID: "88888"
+    groupID: "sd",
+    groupName: "otherGroup"
   }
 ];
 

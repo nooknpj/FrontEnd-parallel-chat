@@ -4,7 +4,12 @@ import { Button } from "react-bootstrap";
 export class JoinedGroupItem extends Component {
   onEnterButtonClick = e => {
     let groupID = this.props.groupID;
-    this.props.enterGroup(groupID);
+    let groupName = this.props.groupName;
+    let groupInfo = {
+      groupID: groupID,
+      groupName: groupName
+    };
+    this.props.enterGroup(groupInfo);
   };
 
   render() {
@@ -12,6 +17,9 @@ export class JoinedGroupItem extends Component {
       <div className="groupItem">
         <span> GroupID</span>
         <span> {this.props.groupID}</span>
+
+        <span> {this.props.groupName}</span>
+
         <Button
           variant="primary"
           type="submit"

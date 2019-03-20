@@ -7,6 +7,7 @@ export class OtherGroupItem extends Component {
       <div className="groupItem">
         <span> GroupID</span>
         <span> {this.props.groupID}</span>
+        <span> {this.props.groupName}</span>
         <Button
           variant="primary"
           type="submit"
