@@ -46,6 +46,16 @@ export class HomePage extends Component {
       });
     });
 
+    this.props.socket.on("refreshGroupSucess", data => {
+      this.props.socket.emit("getGroup", { userID });
+      this.props.socket.emit("getOtherGroup", { userID });
+    });
+
+    // if create successful -> issue refreshGroup --> server will io.emit('refreshGroupSuccess') to tell all clients to refresh groups
+    this.props.socket.on("createGroupSuccess", data => {
+      this.props.socket.emit("refreshGroup");
+    });
+
     this.props.socket.on("enterGroupSuccess", data => {
       console.log("enter");
       console.log(data);
