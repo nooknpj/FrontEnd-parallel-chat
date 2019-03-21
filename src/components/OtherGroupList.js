@@ -5,9 +5,10 @@ export class OtherGroupList extends Component {
   render() {
     return this.props.otherGroups.map(groupItem => (
       <OtherGroupItem
-        groupID={groupItem.groupID}
+        groupID={groupItem.groupId}
         //groupID={groupItem.groupId}
         groupName={groupItem.groupName}
+        joinGroup={this.props.joinGroup}
       />
     ));
   }

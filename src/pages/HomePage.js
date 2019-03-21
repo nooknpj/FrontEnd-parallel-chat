@@ -34,6 +34,21 @@ export class HomePage extends Component {
         joinedGroups: data
       });
     });
+
+    this.props.socket.emit("getOtherGroup", { userID });
+
+    this.props.socket.on("getOtherGroupSuccess", data => {
+      console.log("recieve other groups from backend");
+      console.log(data);
+      this.setState({
+        otherGroups: data
+      });
+    });
+
+    this.props.socket.on("joinGroupSuccess", data => {
+      console.log("recieve join group success from backend");
+      console.log(data);
+    });
   }
 
   onLogoutClick = () => {
@@ -51,6 +66,21 @@ export class HomePage extends Component {
 
   joinGroup = e => {
     //doSomething
+    let userID = e.userID;
+    let groupID = e.groupID;
+    this.props.socket.emit("joinGroup", { userID, groupID });
+    this.props.socket.emit("getGroup", { userID });
+    this.props.socket.emit("getOtherGroup", { userID });
+  };
+
+  leaveGroup = e => {
+    let userID = localStorage.getItem("userID");
+    let groupID = this.state.groupID;
+
+    this.props.socket.emit("leaveGroup", { userID, groupID });
+    this.props.socket.emit("getGroup", { userID });
+    this.props.socket.emit("getOtherGroup", { userID });
+    this.onExitClick();
   };
 
   onCreateGroup = e => {
@@ -63,6 +93,8 @@ export class HomePage extends Component {
 
     var createGroupNameForm = this.refs.createGroupNameRef;
     createGroupNameForm.value = "";
+    let userID = this.state.userID;
+    this.props.socket.emit("getOtherGroup", { userID });
   };
 
   onExitClick = e => {
@@ -231,7 +263,7 @@ export class HomePage extends Component {
                 <Button
                   variant="primary"
                   type="submit"
-                  onClick={this.onLeaveGroupClick}
+                  onClick={this.leaveGroup}
                   style={{
                     backgroundColor: "red",
                     border: "red"
