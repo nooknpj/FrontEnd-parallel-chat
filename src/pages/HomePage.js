@@ -52,6 +52,7 @@ export class HomePage extends Component {
       this.setState({
         messages: data
       });
+      this.scrollToBottomOfChat();
     });
 
     this.props.socket.on("sendMsgToEveryone", data => {
