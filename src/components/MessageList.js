@@ -5,8 +5,8 @@ export class MessageList extends Component {
     return this.props.messages.map(messageItem => (
       <MessageItem
         userID={messageItem.userID}
-        content={messageItem.content}
-        time={messageItem.time}
+        content={messageItem.message}
+        time={messageItem.timeSend}
       />
     ));
   }

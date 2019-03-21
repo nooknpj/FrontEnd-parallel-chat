@@ -13,9 +13,9 @@ export class HomePage extends Component {
       messageContent: "",
       createGroupName: "",
       userID: "-1",
-      joinedGroups: joinedGroupsMockUp,
-      otherGroups: otherGroupsMockUp,
-      messages: messagesMockUp
+      joinedGroups: [],
+      otherGroups: [],
+      messages: []
     };
   }
 
@@ -45,9 +45,12 @@ export class HomePage extends Component {
       });
     });
 
-    this.props.socket.on("joinGroupSuccess", data => {
-      console.log("recieve join group success from backend");
+    this.props.socket.on("enterGroupSuccess", data => {
+      console.log("enter");
       console.log(data);
+      this.setState({
+        messages: data
+      });
     });
   }
 
@@ -58,10 +61,13 @@ export class HomePage extends Component {
   };
 
   enterGroup = e => {
+    let groupID = e.groupID;
+    let userID = localStorage.getItem("userID");
     this.setState({
       groupID: e.groupID,
       groupName: e.groupName
     });
+    this.props.socket.emit("enterGroup", { userID, groupID });
   };
 
   joinGroup = e => {
