@@ -6,7 +6,7 @@ import PageNotFound from "./pages/PageNotFound";
 import "./App.css";
 import io from "socket.io-client";
 
-const endpoint = "localhost:8081";
+const endpoint = "172.20.10.9:8081";
 const socket = io.connect(endpoint, {
   reconnection: true,
   reconnectionDelay: 100,
@@ -18,7 +18,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      endpoint: "localhost:8081"
+      endpoint: "172.20.10.9:8081"
     };
   }
 
