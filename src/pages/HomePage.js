@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, FormGroup } from "react-bootstrap";
 import MessageList from "../components/MessageList";
 import JoinedGroupList from "../components/JoinedGroupList";
 import OtherGroupList from "../components/OtherGroupList";
@@ -154,7 +154,8 @@ export class HomePage extends Component {
     console.log(this.state);
   };
 
-  onSendMessageClick = () => {
+  onSendMessageClick = e => {
+    e.preventDefault();
     var messageContent = this.state.messageContent;
     if (messageContent === "") return;
 
@@ -209,27 +210,35 @@ export class HomePage extends Component {
           </div>
 
           <div className="createGroupDiv">
-            <Form.Control
-              ref="createGroupNameRef"
-              id="createGroupName"
-              placeholder="Group name"
-              onChange={this.onFormChange}
-              style={{ width: "60%" }}
-            />
-            <Button
-              variant="primary"
-              type="submit"
-              onClick={this.onCreateGroup}
+            <Form
               style={{
-                fontSize: "15px",
-                padding: "0px",
-                paddingLeft: "4px",
-                paddingRight: "4px",
-                marginLeft: "10px"
+                display: "flex",
+                flexDirection: "row",
+                width: "100%"
               }}
             >
-              Create Group
-            </Button>
+              <Form.Control
+                ref="createGroupNameRef"
+                id="createGroupName"
+                placeholder="Group name"
+                onChange={this.onFormChange}
+                style={{ width: "60%" }}
+              />
+              <Button
+                variant="primary"
+                type="submit"
+                onClick={this.onCreateGroup}
+                style={{
+                  fontSize: "15px",
+                  padding: "0px",
+                  paddingLeft: "4px",
+                  paddingRight: "4px",
+                  marginLeft: "10px"
+                }}
+              >
+                Create Group
+              </Button>
+            </Form>
           </div>
           <p
             style={{
@@ -321,23 +330,35 @@ export class HomePage extends Component {
               </div>
 
               <div className="sendMessageArea">
-                <Form.Control
-                  id="messageContent"
-                  type="text"
-                  placeholder=""
-                  onChange={this.onFormChange}
-                  style={{ marginLeft: "1px", height: "auto" }}
-                  ref="messageContentFormRef"
-                />
-
-                <Button
-                  variant="primary"
-                  type="send"
-                  onClick={this.onSendMessageClick}
-                  style={{ marginLeft: "5px", float: "right" }}
+                <Form
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "100%"
+                  }}
                 >
-                  Send
-                </Button>
+                  <Form.Control
+                    id="messageContent"
+                    type="text"
+                    placeholder=""
+                    onChange={this.onFormChange}
+                    style={{
+                      marginLeft: "1px",
+                      height: "auto",
+                      minWidth: "65%"
+                    }}
+                    ref="messageContentFormRef"
+                  />
+
+                  <Button
+                    variant="primary"
+                    type="send"
+                    onClick={this.onSendMessageClick}
+                    style={{ marginLeft: "5px", float: "right" }}
+                  >
+                    Send
+                  </Button>
+                </Form>
               </div>
             </div>
           </div>

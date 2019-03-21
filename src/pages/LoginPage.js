@@ -49,30 +49,38 @@ export class LoginPage extends Component {
   render() {
     return (
       <div>
-        <Form.Group className="loginForm">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            id="username"
-            placeholder="Username"
-            onChange={this.onFormChange}
-          />
-          <Form.Label style={{ marginTop: "10px" }}>Password</Form.Label>
-          <Form.Control
-            id="password"
-            type="password"
-            placeholder="Password"
-            onChange={this.onFormChange}
-          />
+        <Form
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%"
+          }}
+        >
+          <Form.Group className="loginForm">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              id="username"
+              placeholder="Username"
+              onChange={this.onFormChange}
+            />
+            <Form.Label style={{ marginTop: "10px" }}>Password</Form.Label>
+            <Form.Control
+              id="password"
+              type="password"
+              placeholder="Password"
+              onChange={this.onFormChange}
+            />
 
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={this.onSubmitLoginClick}
-            style={{ margin: "5px", marginTop: "15px", float: "right" }}
-          >
-            Login
-          </Button>
-        </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={this.onSubmitLoginClick}
+              style={{ margin: "5px", marginTop: "15px", float: "right" }}
+            >
+              Login
+            </Button>
+          </Form.Group>
+        </Form>
       </div>
     );
   }
