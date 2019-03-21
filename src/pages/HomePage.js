@@ -52,6 +52,13 @@ export class HomePage extends Component {
         messages: data
       });
     });
+
+    this.props.socket.on("sendMsgSuccess", data => {
+      console.log(data);
+      this.setState({
+        messages: this.state.messages.push(data)
+      });
+    });
   }
 
   onLogoutClick = () => {
@@ -126,17 +133,19 @@ export class HomePage extends Component {
     if (messageContent === "") return;
 
     var messageContentForm = this.refs.messageContentFormRef;
-    let currentTime = new Date().toLocaleString();
+    //let currentTime = new Date().toLocaleString();
 
     // msgs that will be sent to backend will not contain timeStamp
     let msg = {
-      userID: this.state.userID,
-      content: messageContent,
-      time: currentTime
+      userID: localStorage.getItem("userID"),
+      groupID: this.state.groupID,
+      content: messageContent
     };
 
-    this.state.messages.push(msg);
-    console.log(this.state);
+    this.props.socket.emit("sendMsg", msg);
+
+    //this.state.messages.push(msg);
+    //console.log(this.state);
 
     this.setState({
       messageContent: ""
