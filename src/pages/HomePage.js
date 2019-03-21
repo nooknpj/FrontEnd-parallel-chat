@@ -74,9 +74,14 @@ export class HomePage extends Component {
         //messages: newMsg
       });
       console.log(this.state);
+      this.scrollToBottomOfChat();
     });
   }
 
+  scrollToBottomOfChat = () => {
+    let messageArea = this.refs.messageAreaRef;
+    messageArea.scrollTop = messageArea.scrollHeight + 20;
+  };
   onLogoutClick = () => {
     localStorage.setItem("userID", "-1");
     console.log("logouttt");
@@ -173,8 +178,8 @@ export class HomePage extends Component {
 
     messageContentForm.value = "";
 
-    let messageArea = this.refs.messageAreaRef;
-    messageArea.scrollTop = messageArea.scrollHeight + 20;
+    this.scrollToBottomOfChat();
+
     // doSomething
   };
 
