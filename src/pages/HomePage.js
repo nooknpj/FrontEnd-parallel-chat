@@ -25,12 +25,12 @@ export class HomePage extends Component {
       userID: localStorage.getItem("userID")
     });
     let userID = localStorage.getItem("userID");
-    console.log(userID);
+    //console.log(userID);
     this.props.socket.emit("getGroup", { userID });
 
     this.props.socket.on("getGroupSuccess", data => {
-      console.log("recieve groups from backend");
-      console.log(data);
+      // console.log("recieve groups from backend");
+      //console.log(data);
       this.setState({
         joinedGroups: data
       });
@@ -39,26 +39,29 @@ export class HomePage extends Component {
     this.props.socket.emit("getOtherGroup", { userID });
 
     this.props.socket.on("getOtherGroupSuccess", data => {
-      console.log("recieve other groups from backend");
-      console.log(data);
+      // console.log("recieve other groups from backend");
+      //console.log(data);
       this.setState({
         otherGroups: data
       });
     });
 
-    this.props.socket.on("refreshGroupSucess", data => {
+    this.props.socket.on("refreshGroupSuccess", data => {
+      // console.log("reciever command from server to refresh group");
+
       this.props.socket.emit("getGroup", { userID });
       this.props.socket.emit("getOtherGroup", { userID });
     });
 
     // if create successful -> issue refreshGroup --> server will io.emit('refreshGroupSuccess') to tell all clients to refresh groups
     this.props.socket.on("createGroupSuccess", data => {
+      //console.log("client emit refreshGroup to server");
       this.props.socket.emit("refreshGroup");
     });
 
     this.props.socket.on("enterGroupSuccess", data => {
-      console.log("enter");
-      console.log(data);
+      //console.log("enter");
+      // console.log(data);
       this.setState({
         messages: data
       });
@@ -66,8 +69,8 @@ export class HomePage extends Component {
     });
 
     this.props.socket.on("sendMsgToEveryone", data => {
-      console.log("receive io.emit from server");
-      console.log(data);
+      //console.log("receive io.emit from server");
+      //console.log(data);
       let currentGroupID = this.state.groupID;
       let targetGroupID = data.groupID;
 
@@ -95,12 +98,12 @@ export class HomePage extends Component {
   };
   onLogoutClick = () => {
     localStorage.setItem("userID", "-1");
-    console.log("logouttt");
+    //console.log("logouttt");
     window.location.href = "/";
   };
 
   enterGroup = e => {
-    console.log(e.groupID);
+    //console.log(e.groupID);
     let groupID = e.groupID;
     let userID = localStorage.getItem("userID");
     this.setState({
@@ -130,7 +133,7 @@ export class HomePage extends Component {
   };
 
   onCreateGroup = e => {
-    console.log("enter create group in client side");
+    //console.log("enter create group in client side");
     let groupName = this.state.createGroupName;
     this.props.socket.emit("createGroup", { groupName });
     this.setState({
@@ -151,17 +154,17 @@ export class HomePage extends Component {
 
     this.state.groupID = "-1";
     this.state.groupName = "-1";
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   onLeaveGroupClick = e => {
     this.onExitClick();
-    console.log(this.state);
+    //console.log(this.state);
   };
 
   onFormChange = e => {
     this.state[e.target.id] = e.target.value;
-    console.log(this.state);
+    //console.log(this.state);
   };
 
   onSendMessageClick = e => {

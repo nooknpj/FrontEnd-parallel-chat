@@ -16,8 +16,8 @@ export class LoginPage extends Component {
 
   componentDidMount() {
     this.props.socket.on("loginSuccess", data => {
-      console.log("login success returned from backend");
-      console.log(data.userID);
+      //console.log("login success returned from backend");
+      //console.log(data.userID);
       localStorage.setItem("userID", data.userID);
       window.location.href = "/home";
     });
@@ -30,7 +30,7 @@ export class LoginPage extends Component {
   onFormChange = e => {
     this.state[e.target.id] = e.target.value;
 
-    console.log(this.state);
+    //console.log(this.state);
   };
 
   //------------------------------------------------Login Authen-------------------------------------------------------------------------
@@ -39,7 +39,7 @@ export class LoginPage extends Component {
     // call Socket.on or something
     let username = this.state.username;
     let password = this.state.password;
-    console.log("clicked");
+    //console.log("clicked");
     this.props.socket.emit("login", { username, password });
     // window.location.href = "/home";
   };
