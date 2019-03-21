@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import MessageList from "../components/MessageList";
 import JoinedGroupList from "../components/JoinedGroupList";
 import OtherGroupList from "../components/OtherGroupList";
+import { runInThisContext } from "vm";
 
 export class HomePage extends Component {
   constructor() {
@@ -53,11 +54,26 @@ export class HomePage extends Component {
       });
     });
 
-    this.props.socket.on("sendMsgSuccess", data => {
+    this.props.socket.on("sendMsgToEveryone", data => {
+      console.log("receive io.emit from server");
       console.log(data);
+      let currentGroupID = this.state.groupID;
+      let targetGroupID = data.groupID;
+
+      let msg = {
+        ChatuserID: data.userID,
+        timeSend: data.timeSend,
+        message: data.message
+      };
+
+      if (currentGroupID != targetGroupID) return;
+      console.log(msg);
+      //let newMsg = this.state.messages.push(mockUpMsg);
+      this.state.messages.push(msg);
       this.setState({
-        messages: this.state.messages.push(data)
+        //messages: newMsg
       });
+      console.log(this.state);
     });
   }
 
@@ -68,6 +84,7 @@ export class HomePage extends Component {
   };
 
   enterGroup = e => {
+    console.log(e.groupID);
     let groupID = e.groupID;
     let userID = localStorage.getItem("userID");
     this.setState({
@@ -113,8 +130,11 @@ export class HomePage extends Component {
   onExitClick = e => {
     this.setState({
       groupID: "-1",
-      groupNmae: "-1"
+      groupName: "-1"
     });
+
+    this.state.groupID = "-1";
+    this.state.groupName = "-1";
     console.log(this.state);
   };
 

@@ -5,7 +5,7 @@ export class JoinedGroupList extends Component {
   render() {
     return this.props.joinedGroups.map(groupItem => (
       <JoinedGroupItem
-        groupID={groupItem.groupId}
+        groupID={groupItem.groupID}
         groupName={groupItem.groupName}
         enterGroup={this.props.enterGroup}
       />

@@ -4,7 +4,7 @@ export class MessageList extends Component {
   render() {
     return this.props.messages.map(messageItem => (
       <MessageItem
-        userID={messageItem.userID}
+        userID={messageItem.ChatuserID}
         content={messageItem.message}
         time={messageItem.timeSend}
       />
