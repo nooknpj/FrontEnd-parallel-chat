@@ -90,6 +90,20 @@ export class HomePage extends Component {
       console.log(this.state);
       this.scrollToBottomOfChat();
     });
+
+    this.props.socket.on("getCurrentStatus", data => {
+      let userID = localStorage.getItem("userID");
+      let groupID = this.state.groupID;
+      let messageContent = this.state.messageContent;
+
+      let status = {
+        userID: userID,
+        groupID: groupID,
+        messageContent: messageContent
+      };
+
+      this.props.socket.emit("returnStatus", status);
+    });
   }
 
   scrollToBottomOfChat = () => {

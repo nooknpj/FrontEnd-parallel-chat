@@ -6,7 +6,9 @@ import PageNotFound from "./pages/PageNotFound";
 import "./App.css";
 import io from "socket.io-client";
 
-const endpoint = "172.20.10.9:8081";
+//const endpoint = "172.20.10.9:8081";
+const endpoint = "localhost:5000";
+
 const socket = io.connect(endpoint, {
   reconnection: true,
   reconnectionDelay: 100,
@@ -17,9 +19,9 @@ const socket = io.connect(endpoint, {
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      endpoint: "172.20.10.9:8081"
-    };
+    // this.state = {
+    //   endpoint: "172.20.10.9:8081"
+    // };
   }
 
   componentDidMount = () => {

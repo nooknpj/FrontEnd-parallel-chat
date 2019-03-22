@@ -49,6 +49,10 @@ export class LoginPage extends Component {
   render() {
     return (
       <div>
+        <p style={{ marginLeft: "50vh", marginTop: "10vh", fontSize: "100px" }}>
+          {" "}
+          Carpe Noctem
+        </p>
         <Form
           style={{
             display: "flex",
