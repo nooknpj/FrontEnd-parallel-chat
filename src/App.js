@@ -7,7 +7,7 @@ import "./App.css";
 import io from "socket.io-client";
 
 //const endpoint = "172.20.10.9:8081";
-const endpoint = "192.168.1.35:5000";
+const endpoint = "localhost:5000";
 
 const socket = io.connect(endpoint, {
   reconnection: true,
